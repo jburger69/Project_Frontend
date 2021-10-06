@@ -20,10 +20,10 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
-  cursor: pointer;
-  &.active {
-    color: #15cdfc;
-  }
+  // cursor: pointer;
+  // &.active {
+  //   color: #15cdfc;
+  // }
 `;
 
 
@@ -78,15 +78,18 @@ export const NavBtnLink = styled(Link)`
 function Navbar(){
     return (
         <Nav>
-          <NavLink to=''>
+          <NavLink to='/'>
           <img width="80px" height="auto" className="img-responsive"  alt="logo"  />
           </NavLink>
           <NavMenu>
-            <NavLink to='/home' activeStyle>
+            <NavLink to='/'>
               Home
             </NavLink>
-            <NavLink to='/login' activeStyle>
+            <NavLink to='/login'>
               Login
+            </NavLink>
+            <NavLink to='/profile'>
+              profile
             </NavLink>
           </NavMenu>
         </Nav>
