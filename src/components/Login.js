@@ -19,7 +19,25 @@ class Login extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log('hmmmmmm... now what?')
+        
+        let user = {
+            name: this.state.name,
+            password: this.state.password
+        }
+
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.props.setCurrentUser(data)
+            this.props.routerProps.history.push('/profile')
+        })
     }
 
 
