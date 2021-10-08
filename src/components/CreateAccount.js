@@ -24,7 +24,22 @@ class CreateAccount extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log("submitting this form...")
+        
+        let user = {
+            name: this.state.name,
+            password: this.state.password
+        }
+
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
     }
 
     render(){
