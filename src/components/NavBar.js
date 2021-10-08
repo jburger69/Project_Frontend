@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink as Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
@@ -75,26 +75,40 @@ export const NavBtnLink = styled(Link)`
 
 
 
-function Navbar(){
+class Navbar extends React.Component {
+
+
+
+  render() {
     return (
-        <Nav>
+      <Nav>
+        <NavLink to='/'>
+        <img width="80px" height="auto" className="img-responsive"  alt="logo"  />
+        </NavLink>
+        <NavMenu>
           <NavLink to='/'>
-          <img width="80px" height="auto" className="img-responsive"  alt="logo"  />
+            Home
           </NavLink>
-          <NavMenu>
-            <NavLink to='/'>
-              Home
+          <NavLink to='/profile'>
+            profile
+          </NavLink>
+          {this.props.currentUser ? (
+            <NavLink to='/' onClick={this.props.logout} >
+            Logout
             </NavLink>
+          ) : (
             <NavLink to='/login'>
-              Login
+            Login
             </NavLink>
-            <NavLink to='/profile'>
-              profile
-            </NavLink>
-          </NavMenu>
-        </Nav>
+          )}
+          <NavLink to='/create_account'>
+            Create an Account
+          </NavLink>
+        </NavMenu>
+      </Nav>
     );
   };
+}
   
   
 export default Navbar;
