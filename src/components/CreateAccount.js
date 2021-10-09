@@ -1,4 +1,5 @@
 import React from 'react';
+import { DirectUpload } from 'activestorage';
 
 class CreateAccount extends React.Component {
     constructor(){
@@ -39,7 +40,18 @@ class CreateAccount extends React.Component {
             body: JSON.stringify(user)
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => this.uploadFile(this.state.avatar, data))
+    }
+
+    uploadFile = (file, user) => {
+        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        upload.create((error, blob) => {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('there is no error...')
+            }
+        })
     }
 
     render(){
