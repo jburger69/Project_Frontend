@@ -45,11 +45,21 @@ class CreateAccount extends React.Component {
 
     uploadFile = (file, user) => {
         const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        debugger; //Start here
         upload.create((error, blob) => {
             if (error) {
                 console.log(error)
             } else {
-                console.log('there is no error...')
+                fetch(`http://localhost:3000/users/${user.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({avatar: blob.signed_id})
+                })
+                .then(response => response.json())
+                .then(result => console.log(result))
             }
         })
     }
