@@ -45,7 +45,6 @@ class CreateAccount extends React.Component {
 
     uploadFile = (file, user) => {
         const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
-        debugger; //Start here
         upload.create((error, blob) => {
             if (error) {
                 console.log(error)
@@ -66,14 +65,28 @@ class CreateAccount extends React.Component {
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <label>Name:</label>
-                <input type='text' name='name' value={this.state.name} onChange={this.handleOnChange} />
-                <label>Password:</label>
-                <input type='password' name='password' value={this.state.password} onChange={this.handleOnChange} />
-                <label>Upload your Avatar:</label>
-                <input type='file' name='avatar' onChange={this.handleOnChange} />
-                <input type='submit' value='Create My Account' />
+            <form onSubmit={this.handleSubmit} >
+                <h3>Create an Account</h3>
+
+                <div className="form-group">
+                    <label>Name</label>
+                    <input type="text" className="form-control" placeholder="First name" value={this.state.name} onChange={this.handleOnChange} />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" value={this.state.password} onChange={this.handleOnChange} />
+                </div>
+
+                <div className="form-group">
+                    <label>Avatar</label>
+                    <input type="file" className="form-control" onChange={this.handleOnChange} />
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-block" value='Create My Account'>Create Account</button>
+                <p className="forgot-password text-right">
+                    Already registered <a href="/Login">sign in?</a>
+                </p>
             </form>
         )
     }
