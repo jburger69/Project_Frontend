@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Navbar from './components/NavBar';
 import Profile from './components/Profile';
 import CreateAccount from './components/CreateAccount';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
 
@@ -35,18 +36,24 @@ class App extends React.Component {
         return (
             <Router>
                 <Navbar currentUser={this.state.CurrentUser} logout={this.logout}/>
-                <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/login' render={(props) => <Login setCurrentUser={this.setCurrentUser} routerProps={props} />} />
-                    <Route path='/profile' render={() => {
-                        return this.state.CurrentUser ? (
-                            <Profile currentUser={this.state.CurrentUser} currentAvatar={this.state.CurrentAvatar} />
-                        ) : (
-                            <Redirect to='/login' />
-                        )
-                    }} />
-                    <Route path='/create_account' component={CreateAccount} />
-                </Switch>
+                <div className="App">
+                    <div className="auth-wrapper">
+                        <div className="auth-inner">
+                        <Switch>
+                        <Route path='/' exact component={Home} />
+                                    <Route path='/login' render={(props) => <Login setCurrentUser={this.setCurrentUser} routerProps={props} />} />
+                                    <Route path='/profile' render={() => {
+                                        return this.state.CurrentUser ? (
+                                            <Profile currentUser={this.state.CurrentUser} currentAvatar={this.state.CurrentAvatar} />
+                                        ) : (
+                                            <Redirect to='/login' />
+                                        )
+                                    }} />
+                                    <Route path='/create_account' component={CreateAccount} />
+                        </Switch>
+                        </div>
+                    </div>
+                </div>
             </Router>
         )
     }
